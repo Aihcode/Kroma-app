@@ -1,0 +1,6 @@
+{
+  "name": "Kroma Studio",
+  "description": "Plataforma móvil de gestión, edición externa, streaming en vivo y monetización multimedia con retiros PayPal y Material 3 Expressive.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Kroma Studio</string>
+    <string name="share_target_label">Publicar en Kroma Studio</string>
+    <string name="cloud_functions_base_url" translatable="false">https://us-central1-gen-lang-client-0666578098.cloudfunctions.net/</string>
+
+    <!-- Navigation & Studio -->
+    <string name="nav_studio">Estudio</string>
+    <string name="nav_library">Publicaciones</string>
+    <string name="nav_wallet">Billetera</string>
+    <string name="nav_create">Crear</string>
+    <string name="sign_in_google">Continuar con Google</string>
+    <string name="sign_out">Cerrar sesión</string>
+
+    <!-- Login Screen -->
+    <string name="login_badge">KROMA STUDIO · M3 EXPRESSIVE</string>
+    <string name="login_headline">Crea. Edita fuera. Monetiza en vivo.</string>
+    <string name="login_subheadline">Captura con CameraX, edita con tus apps favoritas sin fricción y cobra tus ingresos directo por PayPal.</string>
+    <string name="login_providers_note">Google Sign-In activo vía Credential Manager. Proveedores adicionales (Facebook, Apple, X) configurables en Firebase Console.</string>
+
+    <!-- Studio & External Editor -->
+    <string name="studio_title">Estudio Creativo</string>
+    <string name="capture_mode_video">Video</string>
+    <string name="capture_mode_photo">Foto</string>
+    <string name="capture_mode_live">En Vivo</string>
+    <string name="pick_from_gallery">Elegir de Galería</string>
+    <string name="edit_external_cta">Editar en App Externa</string>
+    <string name="publish_now_cta">Configurar y Publicar</string>
+    <string name="permission_camera_rationale">Kroma Studio necesita cámara y micrófono para grabar clips HD y transmitir en vivo.</string>
+    <string name="grant_permissions">Permitir Cámara y Audio</string>
+
+    <!-- Wallet & PayPal -->
+    <string name="wallet_title">Monetización &amp; PayPal</string>
+    <string name="available_balance_label">Balance Disponible</string>
+    <string name="pending_balance_label">En Liquidación</string>
+    <string name="total_earned_label">Ingresos Históricos</string>
+    <string name="withdraw_paypal_cta">Retirar a PayPal</string>
+    <string name="min_payout_hint">Mínimo de retiro: $10.00 USD</string>
+</resources>

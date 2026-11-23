@@ -1,0 +1,201 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Creator account profile, verification status, PayPal payout settings, and server-managed balances.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Firebase Auth UID of the creator" },
+        "displayName": { "type": "string", "description": "Creator public display name" },
+        "handle": { "type": "string", "description": "Creator handle e.g. @kromacreator" },
+        "avatarUrl": { "type": "string", "description": "Optional profile avatar URL" },
+        "paypalEmail": { "type": "string", "description": "Linked PayPal email for payouts" },
+        "preferredPayoutCurrency": { "type": "string", "enum": ["USD", "EUR", "MXN"] },
+        "verifiedCreator": { "type": "boolean", "description": "Server-managed creator verification badge" },
+        "availableBalanceCents": { "type": "integer", "description": "Server-managed withdrawable balance in cents" },
+        "pendingBalanceCents": { "type": "integer", "description": "Server-managed pending balance in cents" },
+        "totalEarnedCents": { "type": "integer", "description": "Server-managed lifetime earnings in cents" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp on creation" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp on update" }
+      },
+      "required": [
+        "userId",
+        "displayName",
+        "handle",
+        "preferredPayoutCurrency",
+        "verifiedCreator",
+        "availableBalanceCents",
+        "pendingBalanceCents",
+        "totalEarnedCents",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "MediaPost": {
+      "title": "MediaPost",
+      "description": "Video or image publication managed by the creator with external editor metadata and monetization settings.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "creatorName": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "mediaType": { "type": "string", "enum": ["VIDEO", "IMAGE"] },
+        "visibility": { "type": "string", "enum": ["PUBLIC", "PRIVATE", "SUBSCRIBERS"] },
+        "monetizationType": { "type": "string", "enum": ["FREE_ADS", "PAY_PER_VIEW", "LIVE_TIP"] },
+        "priceCents": { "type": "integer" },
+        "tags": { "type": "array" },
+        "mediaUri": { "type": "string" },
+        "editedExternally": { "type": "boolean" },
+        "externalEditorName": { "type": "string" },
+        "uploadState": { "type": "string", "enum": ["QUEUED", "COMPRESSING", "UPLOADING", "PUBLISHED"] },
+        "uploadProgress": { "type": "integer" },
+        "viewsCount": { "type": "integer" },
+        "earningsCents": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "userId",
+        "creatorName",
+        "title",
+        "description",
+        "mediaType",
+        "visibility",
+        "monetizationType",
+        "priceCents",
+        "tags",
+        "mediaUri",
+        "editedExternally",
+        "uploadState",
+        "uploadProgress",
+        "viewsCount",
+        "earningsCents",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "LiveStream": {
+      "title": "LiveStream",
+      "description": "RTMP/WebRTC live broadcast session with status lifecycle and server-credited live tips.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "creatorName": { "type": "string" },
+        "title": { "type": "string" },
+        "rtmpIngestUrl": { "type": "string" },
+        "playbackUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["PREPARING", "LIVE", "ENDED"] },
+        "viewerCount": { "type": "integer" },
+        "tipsEarnedCents": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "userId",
+        "creatorName",
+        "title",
+        "rtmpIngestUrl",
+        "playbackUrl",
+        "status",
+        "viewerCount",
+        "tipsEarnedCents",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "LiveChatMessage": {
+      "title": "LiveChatMessage",
+      "description": "Realtime chat message inside a live stream broadcast.",
+      "type": "object",
+      "properties": {
+        "streamId": { "type": "string" },
+        "userId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "message": { "type": "string" },
+        "tipCents": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["streamId", "userId", "senderName", "message", "tipCents", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Immutable server-generated ledger entry for creator revenue or payout debits.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "sourceType": { "type": "string", "enum": ["VIDEO_VIEWS", "EXCLUSIVE_UNLOCK", "LIVE_GIFT", "PAYOUT_DEBIT"] },
+        "title": { "type": "string" },
+        "referenceId": { "type": "string" },
+        "grossAmountCents": { "type": "integer" },
+        "platformFeeCents": { "type": "integer" },
+        "netAmountCents": { "type": "integer" },
+        "status": { "type": "string", "enum": ["PENDING", "AVAILABLE", "PAID_OUT"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "userId",
+        "sourceType",
+        "title",
+        "referenceId",
+        "grossAmountCents",
+        "platformFeeCents",
+        "netAmountCents",
+        "status",
+        "createdAt"
+      ]
+    },
+    "Payout": {
+      "title": "Payout",
+      "description": "PayPal Payouts API receipt and asynchronous settlement state managed by Cloud Functions.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "paypalEmail": { "type": "string" },
+        "amountCents": { "type": "integer" },
+        "currency": { "type": "string", "enum": ["USD", "EUR", "MXN"] },
+        "payoutBatchId": { "type": "string" },
+        "status": { "type": "string", "enum": ["REQUESTED", "PENDING", "SUCCESS", "FAILED"] },
+        "failureReason": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "userId",
+        "paypalEmail",
+        "amountCents",
+        "currency",
+        "payoutBatchId",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Private creator profile, PayPal email, and server-managed balances."
+    },
+    "/media_posts/{postId}": {
+      "schema": { "$ref": "#/entities/MediaPost" },
+      "description": "Creator media posts with visibility, external editor flag, upload status, and monetization model."
+    },
+    "/live_streams/{streamId}": {
+      "schema": { "$ref": "#/entities/LiveStream" },
+      "description": "Active and past RTMP/WebRTC live broadcast sessions."
+    },
+    "/live_streams/{streamId}/chat_messages/{messageId}": {
+      "schema": { "$ref": "#/entities/LiveChatMessage" },
+      "description": "Realtime chat messages scoped to a live stream."
+    },
+    "/transactions/{txId}": {
+      "schema": { "$ref": "#/entities/Transaction" },
+      "description": "Server-written immutable financial ledger entries."
+    },
+    "/payouts/{payoutId}": {
+      "schema": { "$ref": "#/entities/Payout" },
+      "description": "Server-written PayPal payout receipts and batch statuses."
+    }
+  }
+}
